@@ -86,7 +86,7 @@ class Index
             <div class='header'>
               <h1>Git Blind</h1>
               <div class='intro'>
-                <p>Git blind is a tool to help you review applicants github profile with reduced bias.</p>
+                <p>Git blind is a tool to help you review an applicant's github profile with reduced bias.</p>
                 <p>
                   Code and documentation:
                   <a href='#{GITHUB_REPO}'>#{GITHUB_REPO}</a>
