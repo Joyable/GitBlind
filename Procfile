@@ -1,1 +1,1 @@
-web: ruby server.rb
+web: puma -C puma.rb
