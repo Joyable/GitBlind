@@ -1,5 +1,5 @@
 class Index
-  GITHUB_REPO = 'https://github.com/joyable/github-redact'
+  GITHUB_REPO = 'https://github.com/joyable/gitblind'
 
   def self.process_request(request)
 
