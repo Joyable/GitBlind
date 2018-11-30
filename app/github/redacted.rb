@@ -11,10 +11,10 @@ module Github
         redactions = Base64.decode64(redact).split(',')
       end
 
-      path = request.path
+      path = request.fullpath
 
       # If the root seems base64 encoded, decode it before passing to github
-      _, root_path, = path.split('/')
+      _, root_path, = request.path.split('/')
       if root_path
         decoded_root = Base64.decode64(root_path)
 
