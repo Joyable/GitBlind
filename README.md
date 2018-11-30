@@ -1,6 +1,8 @@
 # Git Blind
 
-A tool to help you review applicants github profile with reduced bias.
+A tool to help you review an applicant’s github profile with reduced bias.
+
+You can view a live version of this tool at [gitblind.com](http://gitblind.com)
 
 ## Usage
 
