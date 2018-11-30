@@ -41,10 +41,9 @@ loop do
     redactions = Base64.decode64(redact[0]).split(',')
   end
 
-  # If the root is base64 encoded, decode it before passing to github
-  if %r{^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$}.match?(root_path)
-    decoded_root = Base64.decode64(root_path)
-    redactions |= [decoded_root]
+  # If the root seems base64 encoded, decode it before passing to github
+  decoded_root = Base64.decode64(root_path)
+  if decoded_root.ascii_only?
     path = path.gsub(/#{root_path}/, decoded_root)
   end
 
