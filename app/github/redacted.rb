@@ -32,7 +32,8 @@ module Github
           .commit-tease,
           .user-profile-mini-avatar,
           .avatar,
-          .vcard-details {
+          .vcard-details,
+          .signup-prompt-bg {
             display: none !IMPORTANT;
           }
         </style>
