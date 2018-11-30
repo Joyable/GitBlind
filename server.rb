@@ -27,21 +27,25 @@ loop do
   _, raw_path = request.split(' ')
   path = raw_path
 
-  _, query_string = path.split('?')
+  no_query_path, query_string = path.split('?')
+  _, root_path, = no_query_path.split('/')
 
-  redactions = {}
+  redactions = []
 
-  # If we have a 'redact' query param, swap out any redacted strings
-  # in the path before passing to github.
+  # If we have a 'redact' query param, parse the redactions array
   if query_string &&
      (parsed_query = CGI::parse(query_string)) &&
      (redact = parsed_query['redact']) &&
      redact.any?
 
     redactions = Base64.decode64(redact[0]).split(',')
-    redactions.each do |redaction|
-      path = path.gsub(/#{Base64.strict_encode64(redaction)}/, redaction)
-    end
+  end
+
+  # If the root is base64 encoded, decode it before passing to github
+  if %r{^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$}.match?(root_path)
+    decoded_root = Base64.decode64(root_path)
+    redactions |= [decoded_root]
+    path = path.gsub(/#{root_path}/, decoded_root)
   end
 
   github_uri = URI("https://github.com#{path}")
@@ -55,9 +59,9 @@ loop do
   # These styles hide some identifying data, like the user's avatar
   injected_styles = <<-CSS
     <style>
-      .user-profile-mini-avatar, .avatar {
-        display: none !IMPORTANT;
-      }
+      .commit-tease,
+      .user-profile-mini-avatar,
+      .avatar,
       .vcard-details {
         display: none !IMPORTANT;
       }
