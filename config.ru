@@ -17,13 +17,15 @@ run Proc.new { |env|
     redactions = Base64.decode64(redact[0]).split(',')
   end
   path = request.path
+
   _, root_path, = path.split('/')
+  if root_path
+    decoded_root = Base64.decode64(root_path)
 
-  decoded_root = Base64.decode64(root_path)
-
-  # If the root seems base64 encoded, decode it before passing to github
-  if decoded_root.ascii_only?
-    path = path.gsub(/#{root_path}/, decoded_root)
+    # If the root seems base64 encoded, decode it before passing to github
+    if decoded_root.ascii_only?
+      path = path.gsub(/#{root_path}/, decoded_root)
+    end
   end
 
   github_uri = URI("https://github.com#{path}")
