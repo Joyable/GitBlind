@@ -4,6 +4,8 @@ A tool to help you review an applicant’s github profile with reduced bias.
 
 You can view a live version of this tool at [gitblind.com](http://gitblind.com)
 
+An example redacted profile can be viewed [here](http://gitblind.com/SW1wZXJpb3BvbGlz?redact=SW1wZXJpb3BvbGlzLE5vcmEgVHJhcHAsTm9yYSxUcmFwcCxKb3lhYmxl)
+
 ## Usage
 
 This tool is intended to generate a blind view of an applicants GitHub profile. This means you can review their work on GitHub with reduced bias since their username, name, avatar, and other identifying details will be hidden.
